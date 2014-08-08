@@ -15,20 +15,17 @@ end:false,
 
     
 
-  t : function(){this.f();},
-f: function(){alert('hiihihi');},
-
 getPicsObject: function(){
 
 
        $.ajax({
        context:this,
       type: "POST",
-      url: "gallery_datatwo.php",
+      url: "gallery_data.php",
    
       success: function(res) {
      
-       // $("#result").append(res);
+       
        a =  JSON.parse(res);
        this.imgObj = a;
    n = a.length;
@@ -46,8 +43,7 @@ showPics: function(){
     nd = num+4;
     z = this.imgObj;
 if(z){
-//console.log('z'+z);
-//console.log('n'+num);
+
 
 
        for(var i = num; i < nd; i++) {
@@ -57,7 +53,6 @@ if(z){
  
 
     var row = i+1;
-    //  $("#result").append('<div style = "outline:1px solid black;" class ="col-md-3 imgcontainer">'+obj.id+'</div>');
       $("#result").append('<div style = "outline:1px solid black;" class ="col-md-3 imgcontainer"><img id = "'+obj.id+'"  class = "profileImg img-rounded img-responsive" style = "display:none;" onload = "showIt('+obj.id+')" src = "/images/'+obj.imgUrl+'"/></div>');
 
 
@@ -67,9 +62,7 @@ if(i == nd){$("#result").append('</div>');}
 }
 
 
-}else{//console.log('no l');
-}
-       
+}   
 
 },
 scroller: function() {
@@ -83,14 +76,12 @@ scroller: function() {
 
 
      if($(window).scrollTop() + $(window).height() > $(document).height()) {
-//console.log('loadmore show');
+
       $('#loadMore').show();
     }
     if($(window).scrollTop() + $(window).height() == $(document).height() && this.end == false) {
 console.log('end is'+this.end);
       $('#loadMore').fadeOut();
-//console.log('loadmore fade');
-
 
      this.page= this.page+this.rows;
 
@@ -100,9 +91,6 @@ console.log('end is'+this.end);
 
 
       var loadedCount =  $('.profileImg').length;
-     // //console.log('loadcaount '+ loadedCount ); 
-      //console.log('total '+ this.total );
-
 
 
 
