@@ -25,7 +25,7 @@ var Pics ={
      $.ajax({
        context:this,
        type: "POST",
-       url: "gallery_datatwo.php",
+       url: "gallery_data.php",
 
        success: function(res) {
 
