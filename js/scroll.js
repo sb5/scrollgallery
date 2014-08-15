@@ -5,16 +5,43 @@ function showIt(id){
 
 var Pics ={
   rows: 4,
+  imgHeight:200,
   imgObj:{},
   total:0,
   page : 0,
   end:false,
+  row_num:0,
+
+  startRow:function(){
+    $("#result").append('<div class = "row" id= "row'+this.row_num+'">');
+  this.loopThru();
+  },
+  loopThru:function(){
+  
+  num = this.page;
+
+
+  nd = num+4; 
+  for(var i = num; i < nd; i++) {
+
+
+ if(i==num){}
+ var obj = z.image_array[i];
 
 
 
 
+    $("#row"+this.row_num).append('<div class ="col-md-3 imgcontainer"><img id = "'+obj.id+'"  class = "profileImg img-rounded img-responsive" style = "display:none;" onload = "showIt('+obj.id+')" src = "/images/2014_conf/'+obj.imgUrl+'"/></div>');
 
 
+
+    if(i == nd){$("#result").append('</div>');}
+
+  }
+  },
+  endRow:function(){
+  $("#result").append('</div>');this.row_num++;
+  },
   noMore : function(){ $('#loadMore').css('display','block');
   $('#loadMore').html('<h3>no morepics :(</h3>');},
 
@@ -40,33 +67,18 @@ var Pics ={
    });
    },
    showPics: function(){
-
-    num = this.page;
-
-    nd = num+4;
     z = this.imgObj;
-    if(z){
+ 	ht = $(window).height();
+    if(z){  numRows = Math.floor(ht/this.imgHeight);
+    for(x=1;x<=numRows;x++){
+		this.startRow();
 
-for(var i = num; i < nd; i++) {
- if(i==num){$("#result").append('<div class = "row">');}
- var obj = z.image_array[i];
-
-
-
- var row = i+1;
-    $("#result").append('<div class ="col-md-3 imgcontainer"><img id = "'+obj.id+'"  class = "profileImg img-rounded img-responsive" style = "display:none;" onload = "showIt('+obj.id+')" src = "/shop/images/'+obj.imgUrl+'"/></div>');
+		this.endRow();
+		  }
+        }
 
 
-
-    if(i == nd){$("#result").append('</div>');}
-
-  }
-
-
-}
-
-
-},
+    },
 scroller: function() {
 
   if(this.end == false){
@@ -89,7 +101,7 @@ if($(window).scrollTop() + $(window).height() == $(document).height() && this.en
 
 this.page= this.page+this.rows;
 
-this.page_num =this.page;
+
 
 
 
@@ -103,10 +115,10 @@ var loadedCount =  $('.profileImg').length;
 
       if(loadedCount < this.total && loadedCount < (this.total-this.rows) ){
         console.log(loadedCount+'isless  than'+this.total+'and '+loadedCount+'is less than'+ (this.total-this.rows));
-        this.showPics(this.page_num);
+        this.showPics(this.page);
 
 
-      }else{  this.end = true;
+      }else{  this.end = true;this.noMore();
 
       }
 
@@ -116,7 +128,7 @@ var loadedCount =  $('.profileImg').length;
 
 
 
-  }else{this.noMore();}},
+  }},
   getMore: function(total){
 
 
