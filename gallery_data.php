@@ -4,7 +4,7 @@
 function loadImages(){ 
 
 $number = 4;
-$img_dir = '/images/2014_conf';//change here
+$img_dir = '/images/';//change here
 $dir = $_SERVER['DOCUMENT_ROOT'].$img_dir;
 $scan = scandir($dir);
 $imgCount=0;
