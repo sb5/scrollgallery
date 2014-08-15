@@ -4,7 +4,7 @@ function showIt(id){
 }
 
 var Pics ={
-  img_dir = '',
+  img_dir : false,
   rows: 4,
   imgHeight:200,
   imgObj:{},
@@ -32,7 +32,7 @@ var Pics ={
 
 
 
-    $("#row"+this.row_num).append('<div class ="col-md-3 imgcontainer"><img id = "'+obj.id+'"  class = "profileImg img-rounded img-responsive" style = "display:none;" onload = "showIt('+obj.id+')" src = "'+this.img_dir+obj.imgUrl+'"/></div>');
+    $("#row"+this.row_num).append('<div class ="col-md-3 imgcontainer"><img id = "'+obj.id+'"  class = "profileImg img-rounded img-responsive" style = "display:none;" onload = "showIt('+obj.id+')" src = "'+this.img_dir+'/'+obj.imgUrl+'"/></div>');
 
 
 
@@ -58,13 +58,14 @@ var Pics ={
        success: function(res) {
 console.log(res);
        a =  JSON.parse(res);
+            this.img_dir = a.directory;
        this.imgObj = a;
        n = a.length;
        this.showPics();
        this.total = a.total_count;
 
        this.getMore(this.total);
-       this.img_dir = a.directory;
+  
      }
    });
    },
